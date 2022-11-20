@@ -81,6 +81,27 @@ def accounts_scr():
     for rec in acc_list:
         print('{:<10}{:<8}{:<12}{:<15}{:<20}{:<10}'.format(rec[0], rec[1], rec[2], rec[3], rec[4], rec[5]))
 
+def item_entry():
+    query = f"SELECT * FROM shop;"
+    cr.execute(query)
+    info = cr.fetchall()
+    L = [i[0] for i in info]
+    last_val = max(L)
+    print(last_val)
+    prod = input('Enter new product name\n>>> ');
+    price = int(input("Enter the new product price\n>>> "))
+    stock = int(input("Enter the amount of products in stock\n>>> "))
+    entry = f"INSERT INTO shop values({last_val+1}, '{prod}', {price}, {stock})"
+    print(entry) # To be commented out
+    cr.execute(entry)
+    tf = input("Are you sure the values of the entry are correct?(y/n)\n>>> ")
+    if tf.lower() == 'n':
+        print('| (i) Entry aborted')
+        sql_obj.rollback()
+    elif tf.lower() == 'y':
+        print('| (i) Entry has been entered')
+        sql_obj.commit()
+
 def admin():
     print('| (i) Admin mode activated\n\n\tADMIN LOGIN ')
     print('-'*30)
@@ -103,11 +124,18 @@ def admin():
         if ch == 1:
             database_scr()
             admin()
+
         elif ch == 2:
             accounts_scr()
             admin()
+
+        elif ch == 4:
+            item_entry()
+            admin()
+
         elif ch == 5:
             print('| (i) Quitting admin terminal')
+
         else:
             print('| ERROR: Invalid option please try again')
             admin()
