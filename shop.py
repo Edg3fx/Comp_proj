@@ -9,10 +9,9 @@ sql_obj = mys.connect(
 
 cr = sql_obj.cursor()
 
-query = f"SELECT * FROM shop;"
-cr.execute(query)
-
 def shop_scr():
+    query = f"SELECT * FROM shop;"
+    cr.execute(query)
     print('{:<10}{:<15}{:<10}{:<10}'.format('ProdID', 'Product Name', 'Price', 'Stock'))
     print('='*45)
     shop_table = cr.fetchall()
@@ -21,7 +20,21 @@ def shop_scr():
     cmds()
 
 def purchase():
-    pass
+    prod_id = int(input('Enter Product ID of product to buy\n>>> '))
+    stock = int(input("Enter the amount of products\n>>> "))
+    cr.execute(f'SELECT * FROM shop WHERE Prod_ID = {prod_id}')
+    stats = cr.fetchone()
+    name, price = stats[1], stats[2]
+    query = f"UPDATE shop SET Stock = Stock-{stock} WHERE Prod_ID = {prod_id}"
+    cr.execute(query)
+    print(f'The grandtotal for ({stock}) {name} is ${stock*price:,.2f}\n')
+    prompt = input("Complete transaction?(y/n)\n>>>")
+    if prompt.lower() == 'y':
+        sql_obj.commit()
+        print('| (i) Transaction successful')
+    elif prompt.lower() == 'n':
+        sql_obj.rollback()
+        print('| (i) Transaction aborted')
     cmds()
 
 def cmds():
