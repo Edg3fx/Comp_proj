@@ -64,16 +64,16 @@ def create_database():
 
     def insert_into_shop():
         try:
-            cursor.execute("INSERT INTO shop VALUE (1, 'Apple', 12, 100)")
-            cursor.execute("INSERT INTO shop VALUE (2, 'Banana', 10, 250)")
-            cursor.execute("INSERT INTO shop VALUE (3, 'Orange', 20, 125)")
-            cursor.execute("INSERT INTO shop VALUE (4, 'Grapes', 25, 60)")
-            cursor.execute("INSERT INTO shop VALUE (5, 'Mango', 6, 300)")
-            cursor.execute("INSERT INTO shop VALUE (6, 'Pineapple', 17, 75)")
-            cursor.execute("INSERT INTO shop VALUE (7, 'Tomato', 13, 75)")
-            cursor.execute("INSERT INTO shop VALUE (8, 'Pear', 18, 150)")
-            cursor.execute("INSERT INTO shop VALUE (9, 'Lime', 4, 65)")
-            cursor.execute("INSERT INTO shop VALUE (10, 'Cherry', 5, 25)")
+            cursor.execute("INSERT INTO shop VALUE (1, 'Adidas Shoe', 100, 100)")
+            cursor.execute("INSERT INTO shop VALUE (2, 'Nike Shoe', 150, 250)")
+            cursor.execute("INSERT INTO shop VALUE (3, 'Phone case', 20, 125)")
+            cursor.execute("INSERT INTO shop VALUE (4, 'Samsung watch', 75, 60)")
+            cursor.execute("INSERT INTO shop VALUE (5, 'Mi fitbit', 35, 300)")
+            cursor.execute("INSERT INTO shop VALUE (6, 'USB-C Charger', 5, 75)")
+            cursor.execute("INSERT INTO shop VALUE (7, 'Chair set x4', 80, 75)")
+            cursor.execute("INSERT INTO shop VALUE (8, 'Tables', 40, 150)")
+            cursor.execute("INSERT INTO shop VALUE (9, 'Mattress', 90, 65)")
+            cursor.execute("INSERT INTO shop VALUE (10, 'JBL GO 2', 45, 25)")
             connection.commit()
         except Exception as e:
             connection.rollback()
