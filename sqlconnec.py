@@ -81,6 +81,21 @@ def accounts_scr():
     for rec in acc_list:
         print('{:<10}{:<8}{:<12}{:<15}{:<20}{:<10}'.format(rec[0], rec[1], rec[2], rec[3], rec[4], rec[5]))
 
+def stock_change():
+    ID = int(input("Enter the ID of stock to be changed\n>>> "))
+    stock_new = int(input("Enter the new stock value of the item\n>>> "))
+    query = f"UPDATE shop SET Stock = {stock_new} WHERE Prod_ID = {ID}"
+    cr.execute(query)
+    print(query)
+    tf = input("Are you sure the values of the entry are correct?(y/n)\n>>> ")
+    if tf.lower() == 'n':
+        print('| (i) Entry aborted')
+        sql_obj.rollback()
+    elif tf.lower() == 'y':
+        print('| (i) Entry has been entered')
+        sql_obj.commit()
+
+
 def item_entry():
     query = f"SELECT * FROM shop;"
     cr.execute(query)
@@ -92,7 +107,7 @@ def item_entry():
     price = int(input("Enter the new product price\n>>> "))
     stock = int(input("Enter the amount of products in stock\n>>> "))
     entry = f"INSERT INTO shop values({last_val+1}, '{prod}', {price}, {stock})"
-    print(entry) # To be commented out
+    print(entry) # To be commented out 
     cr.execute(entry)
     tf = input("Are you sure the values of the entry are correct?(y/n)\n>>> ")
     if tf.lower() == 'n':
@@ -127,6 +142,10 @@ def admin():
 
         elif ch == 2:
             accounts_scr()
+            admin()
+        
+        elif ch == 3:
+            stock_change()
             admin()
 
         elif ch == 4:
