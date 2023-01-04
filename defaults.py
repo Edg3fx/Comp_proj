@@ -57,6 +57,7 @@ def create_database():
             cursor.execute("INSERT INTO accounts VALUE ('mathew', '7890', 'Mathew', 'George', 'mathew@gmail.com', '0553563238')")
             cursor.execute("INSERT INTO accounts VALUE ('jefferey', '1111', 'Jefferey', 'Beta', 'jefferey@gmail.com', '0552111875')")
             cursor.execute("INSERT INTO accounts VALUE ('adonis', '0000', 'Adonis', 'Sigma', 'adonis@gmail.com', '0550448503')")
+            cursor.execute("INSERT INTO accounts VALUE ('Admin', 'a1b2', 'Mathew', 'George', 'mathew@gmail.com', '0555346573')")
             connection.commit()
         except Exception as e:
             connection.rollback()
